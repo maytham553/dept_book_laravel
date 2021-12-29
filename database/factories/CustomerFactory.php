@@ -9,7 +9,7 @@ $factory->define(Customer::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'phone' => $faker->e164PhoneNumber     ,
-        'max_dept' => $faker->numberBetween($min = 1000, $max = 9000),
+        'max_debt' => $faker->numberBetween($min = 1000, $max = 9000),
         'note' => $faker->text
     ];
 });

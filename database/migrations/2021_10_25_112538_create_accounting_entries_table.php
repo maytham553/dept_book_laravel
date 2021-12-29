@@ -15,6 +15,11 @@ class CreateAccountingEntriesTable extends Migration
     {
         Schema::create('accounting_entries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('item_id');
+            $table->foreign('item_id')->references('id')->on('items');
+            $table->double('payment_amount');
+            $table->date('payment_date');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

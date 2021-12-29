@@ -10,8 +10,8 @@ $factory->define(Item::class, function (Faker $faker) {
     return [
         'customer_id' => rand(1, Customer::count()),
         'name' => $faker->word,
-        'total_amount' => $faker->numberBetween($min = 500, $max = 1000),
-        'installment_amount' => $faker->numberBetween($min = 500, $max = 1000),
+        'total_amount' => $faker->numberBetween($min = 1000000, $max = 1500000),
+        'installment_amount' => $faker->numberBetween($min = 25000, $max = 100000),
         'date_of_payment' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'note' => $faker->text,
     ];

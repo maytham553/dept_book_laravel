@@ -16,5 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('/customer' , 'CustomerController');
 Route::apiResource('/item' , 'ItemController');
+Route::apiResource('/entry' , 'AccountingEntryController');
 Route::post('/customer/search', 'CustomerController@search');
-Route::get('/customer/showByCustomerId/{CustomerId}', 'ItemController@showByCustomerId');
+Route::get('/item/showByCustomerId/{CustomerId}', 'ItemController@showByCustomerId');
+Route::get('/entry/showByItemId/{ItemId}', 'AccountingEntryController@showByItemId');
+Route::get('/item/restAmount/{ItemId}', 'ItemController@restAmount');
+
+

@@ -18,12 +18,12 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'required',
             'phone' => 'required',
-            'max_dept' => 'required',
+            'max_debt' => 'required',
             'note' => ''
         ]);
  
         $NewCustomer = Customer::create($request->all());
-        return  $NewCustomer;
+        return  response()->json($NewCustomer , 201) ;
     }
     public function show($id)
     {
@@ -35,7 +35,7 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'required',
             'phone' => 'required',
-            'max_dept' => 'required',
+            'max_debt' => 'required',
             'note' => ''
         ]);
         $customer->update($request->all());

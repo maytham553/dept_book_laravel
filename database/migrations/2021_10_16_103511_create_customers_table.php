@@ -17,9 +17,8 @@ class CreateCustomersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone');
-            $table->integer('max_dept');
+            $table->integer('max_debt');
             $table->string('note')->nullable();
-
             $table->timestamps();
         });
     }

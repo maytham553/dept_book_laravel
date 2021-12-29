@@ -22,7 +22,7 @@ class CreateItemsTable extends Migration
             $table->double('total_amount');
             $table->double('installment_amount');
             $table->date('date_of_payment');
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

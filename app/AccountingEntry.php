@@ -19,7 +19,7 @@ class AccountingEntry extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function item(): BelongsTo
+    public function item()
     {
         return $this->belongsTo(Item::class);
     }

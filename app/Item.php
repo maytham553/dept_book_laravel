@@ -25,5 +25,10 @@ class Item extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function accountingEntry()
+    {
+        return $this->hasMany(AccountingEntry::class);
+    }
   
 }

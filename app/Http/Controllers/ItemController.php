@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AccountingEntry;
 use App\Item;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,22 @@ class ItemController extends Controller
 {
     public function index()
     {
-        return Item::paginate(15);
+        $payments_amount = 0;
+        $items  = Item::paginate(15);
+        foreach ($items as $item) {
+            $entries =  AccountingEntry::where('item_id', 'like', $item->id)->get();
+            foreach ($entries as $entry) {
+                $payments_amount +=  $entry->payment_amount;
+            }
+           
+            $rest_amount =  $item->total_amount - $payments_amount;
+            $item->rest_amount =$rest_amount ;
+        }
+
+
+
+
+        return $items;
     }
 
     public function store(Request $request)
@@ -48,7 +64,31 @@ class ItemController extends Controller
 
     public function showByCustomerId($CustomerId)
     {
-        return Item::where('customer_id','like',$CustomerId)->paginate(15);
+
+        $payments_amount = 0;
+        $items  = Item::where('customer_id', 'like', $CustomerId)->paginate(15);
+        foreach ($items as $item) {
+            $entries =  AccountingEntry::where('item_id', 'like', $item->id)->get();
+            foreach ($entries as $entry) {
+                $payments_amount +=  $entry->payment_amount;
+            }
+           
+            $rest_amount =  $item->total_amount - $payments_amount;
+            $item->rest_amount =$rest_amount ;
+        }
+
+        return $items;
     }
 
+    public function restAmount($id)
+    {
+        $item =  Item::findOrFail($id);
+        $totalAmount = $item->total_amount;
+        $entries =  AccountingEntry::where('item_id', 'like', $id)->get();
+        $payments_amount = 0;
+        foreach ($entries as $entry) {
+            $payments_amount +=  $entry->payment_amount;
+        }
+        return $totalAmount - $payments_amount;
+    }
 }
