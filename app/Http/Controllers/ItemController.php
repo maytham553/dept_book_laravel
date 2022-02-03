@@ -65,10 +65,11 @@ class ItemController extends Controller
     public function showByCustomerId($CustomerId)
     {
 
-        $payments_amount = 0;
+        
         $items  = Item::where('customer_id', 'like', $CustomerId)->paginate(15);
         foreach ($items as $item) {
             $entries =  AccountingEntry::where('item_id', 'like', $item->id)->get();
+            $payments_amount = 0;
             foreach ($entries as $entry) {
                 $payments_amount +=  $entry->payment_amount;
             }
